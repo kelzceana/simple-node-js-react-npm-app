@@ -1,3 +1,7 @@
+def colorMap [
+    "SUCCESS" : "danger",
+    "FAILURE" : "good"
+]
 pipeline {
     agent {
         docker {
@@ -26,7 +30,14 @@ pipeline {
             }
         }
     }
-    // post {
-    //
-    // }
+    post {
+        always {
+            echo "Build Notification"
+            slackSend (
+                channel: '#automation-builds'
+                color: colorMap[currentBuild.currentResult]
+                message: "*${currentBuild.currentResult}*"
+            )
+        }
+    }
 }
