@@ -1,6 +1,6 @@
 def colorMap = [
-    "SUCCESS" : "danger",
-    "FAILURE" : "good"
+    "SUCCESS" : "good",
+    "FAILURE" : "danger"
 ]
 pipeline {
     agent {
