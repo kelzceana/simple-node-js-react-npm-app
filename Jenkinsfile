@@ -34,8 +34,8 @@ pipeline {
         always {
             echo "Build Notification"
             slackSend (
-                channel: '#automation-builds'
-                color: colorMap[currentBuild.currentResult]
+                channel: '#automation-builds',
+                color: colorMap[currentBuild.currentResult],
                 message: "*${currentBuild.currentResult}*"
             )
         }
