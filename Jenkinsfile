@@ -36,7 +36,7 @@ pipeline {
             slackSend (
                 channel: '#automation-builds',
                 color: colorMap[currentBuild.currentResult],
-                message: "*${currentBuild.currentResult}*"
+                message: "Build ${env.BUILD_NUMBER} was *${currentBuild.currentResult}*. More info at ${env.BUILD_URL}"
             )
         }
     }
