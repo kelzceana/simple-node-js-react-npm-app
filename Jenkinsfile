@@ -10,23 +10,37 @@ pipeline {
         }
     }
     stages {
+        stage('Init') {
+            steps {
+                script {
+                    buildscript = load 'scripts/build.groovy'
+                    testscript = load 'scripts/test.groovy'
+                    deliverscript = load 'scripts/deliver.groovy'
+                }
+            }
+
+        }
         stage('Build') {
             steps {
-                sh 'npm install'
+                script{
+                    buildscript.execute()
+                }
             }
 
         }
         stage('Test') {
             steps {
-                sh './jenkins/scripts/test.sh'
+                script{
+                     testscript.execute()
+                }
             }
 
         }
          stage('Deliver') {
             steps {
-                sh './jenkins/scripts/deliver.sh'
-                input message: 'Finished using the web site? (Click "Proceed" to continue)'
-                sh './jenkins/scripts/kill.sh'
+                script{
+                    deliverscript.execute()
+                }
             }
         }
     }
